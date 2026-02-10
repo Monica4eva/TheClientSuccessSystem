@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fully Booked Foundation - Free Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="input.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md text-center">
+        <a href="https://monicadubesekhwela.com" target="_blank">
+            <img src="TheSCLogo.jpg" alt="The Social Connect Logo" class="mx-auto w-24 h-24">
+        </a>
+        
+        <h1 class="text-xl font-bold mt-4">Get Your Free Client Success System Guide</h1>
+        <p class="text-gray-600 mt-2">Stop winging it. Start scaling with systems that work.</p>
+        <p class="text-sm text-gray-500 mt-1">Enter your details to download the 5-page guide instantly.</p>
+        
+        <form id="downloadForm">
+            <input type="text" id="name" name="name" placeholder="Your Name" class="w-full p-2 border rounded mb-2 mt-4" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" class="w-full p-2 border rounded mb-2" required>
+            <button type="submit" class="w-full bg-yellow-500 text-black py-2 rounded hover:bg-yellow-600 font-semibold">Get My Free Guide</button>
+        </form>
+
+        <p id="successMessage" class="text-green-500 mt-4 hidden">Success! Redirecting to your download...</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+    
+        // Firebase app initialization
+        const firebaseConfig = {
+            apiKey: "AIzaSyDssT8eSZlIWfoSQuvsdKyCx4bbdeuezQ0",
+            authDomain: "the-social-connect-afcfta.firebaseapp.com",
+            projectId: "the-social-connect-afcfta",
+            storageBucket: "the-social-connect-afcfta.firebasestorage.app",
+            messagingSenderId: "546637385036",
+            appId: "1:546637385036:web:e55a262edce0a57a8ed3e9",
+            measurementId: "G-LMV2ZCE5PT"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+    
+        // Form submission
+        document.getElementById('downloadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = "defaultPassword"; // You can set a default password or ask the user to enter it
+    
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+    
+                // Add user to Firestore
+                await setDoc(doc(db, "users", user.uid), { 
+                    name: name, 
+                    email: email,
+                    downloadType: "Client Success System Guide",
+                    timestamp: new Date().toISOString()
+                });
+    
+                // Show success message
+                document.getElementById('successMessage').classList.remove('hidden');
+    
+                setTimeout(() => {
+                    window.location.href = 'https://drive.google.com/file/d/1GApHNHFlKs2px6nA0iXdHcJbfUr3R07i/view?usp=sharing'; // Redirect to ebook download
+                }, 2000);
+    
+            } catch (error) {
+                if (error.code === "auth/email-already-in-use") {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+    
+                    // Update Firestore with the name
+                    await setDoc(doc(db, "users", user.uid), { 
+                        name: name, 
+                        email: email,
+                        downloadType: "Client Success System Guide",
+                        timestamp: new Date().toISOString()
+                    }, { merge: true });
+    
+                    document.getElementById('successMessage').classList.remove('hidden');
+    
+                    setTimeout(() => {
+                        window.location.href = 'https://drive.google.com/file/d/1GApHNHFlKs2px6nA0iXdHcJbfUr3R07i/view?usp=sharing'; // Redirect to ebook download
+                    }, 2000);
+    
+                } else {
+                    console.error("Error:", error.message);
+                    alert("Error: " + error.message);
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

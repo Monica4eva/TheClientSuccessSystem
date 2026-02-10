@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="Input.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+    <!-- FontAwesome for social media icons -->
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="min-h-screen flex flex-col items-center justify-center py-12 px-6 text-center bg-gray-50">
+
+        <!-- Logo -->
+        <div class="mb-8">
+            <img src="TheSCLogo.jpg" alt="The Swift Social Connect Logo" class="w-40 h-40 object-cover rounded-full mx-auto">
+        </div>
+
+        <!-- Contact Info -->
+        <h1 class="text-3xl font-bold text-gray-800">Contact Us</h1>
+        <p class="mt-2 text-gray-600">We’d love to hear from you. Feel free to reach out to us!</p>
+
+        <div class="mt-8">
+            <p class="text-lg text-gray-700">You can contact us via email:</p>
+            <ul class="mt-4 space-y-2">
+                <li><a href="mailto:support@theswiftsocialconnect.com" class="text-blue-600 hover:underline">support@theswiftsocialconnect.com</a></li>
+            </ul>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="mt-8 flex justify-center space-x-6">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/monica-dube-sekhwela/" target="_blank" class="text-gray-800 hover:text-blue-600">
+                <img src="linkedin.png" alt="LinkedIn" class="w-8 h-8">
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/thesocialconnectbw/" target="_blank" class="text-gray-800 hover:text-blue-600">
+                <img src="facebook.png" alt="Facebook" class="w-8 h-8">
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/theswiftsocialconnect/" target="_blank" class="text-gray-800 hover:text-pink-600">
+                <img src="instagram.png" alt="Instagram" class="w-8 h-8">
+            </a>
+        </div>
+
+        <!-- FontAwesome Icons (Backup) -->
+        <div class="mt-4 flex justify-center space-x-6">
+            <a href="https://www.linkedin.com/in/monica-dube-sekhwela/" target="_blank" class="text-gray-800 hover:text-blue-600">
+                <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://www.facebook.com/thesocialconnectbw/" target="_blank" class="text-gray-800 hover:text-blue-600">
+                <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/theswiftsocialconnect/" target="_blank" class="text-gray-800 hover:text-pink-600">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
